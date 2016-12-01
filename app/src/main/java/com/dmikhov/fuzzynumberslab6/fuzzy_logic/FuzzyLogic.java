@@ -1,17 +1,15 @@
 package com.dmikhov.fuzzynumberslab6.fuzzy_logic;
 
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.FuzzyFunction;
+import com.dmikhov.fuzzynumberslab6.utils.Const;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Created by dmikhov on 30.11.2016.
  */
 public class FuzzyLogic {
-
-    final static double EPSILON = 1E-10;
 
     public static float getAlpha(FuzzyNumber fuzzy, float x) {
         if(x < fuzzy.getX0()) {
@@ -38,9 +36,9 @@ public class FuzzyLogic {
         float x = fuzzy.getX1();
         float alpha = getAlpha(fuzzy, x);
         fuzzySingletons.add(new FuzzySingleton(x, alpha));
-        while (x < fuzzy.getX2() && (Math.abs(x - fuzzy.getX2()) > EPSILON)) {
+        while (x < fuzzy.getX2() && (Math.abs(x - fuzzy.getX2()) > Const.EPSILON)) {
             x += step;
-            if(x > fuzzy.getX2() && (Math.abs(x - fuzzy.getX2()) > EPSILON)) {
+            if(x > fuzzy.getX2() && (Math.abs(x - fuzzy.getX2()) > Const.EPSILON)) {
                 x = fuzzy.getX2();
             }
             alpha = getAlpha(fuzzy, x);
@@ -64,7 +62,8 @@ public class FuzzyLogic {
         return matrix;
     }
 
-    public static ArrayList<FuzzyCell> convertToSortedList(FuzzyCell[][] matrix, Comparator comparator) {
+    public static ArrayList<FuzzyCell> convertToSortedList(FuzzyCell[][] matrix) {
+        FuzzyCellComparator comparator = new FuzzyCellComparator();
         int n = matrix.length * matrix[0].length;
         ArrayList<FuzzyCell> list = new ArrayList<>(n);
         for (int i = 0; i < matrix.length; i++) {
@@ -78,7 +77,7 @@ public class FuzzyLogic {
 
     public static void filterList(ArrayList<FuzzyCell> list) {
         for (int i = 0; i < list.size() - 1; i++) {
-            if(list.get(i).valueCoord == list.get(i + 1).valueCoord) {
+            if(FuzzyHelper.compareIfEquals(list.get(i).valueCoord, list.get(i + 1).valueCoord)) {
                 list.remove(i);
                 i--;
             }

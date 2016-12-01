@@ -10,12 +10,14 @@ public class FuzzyCondition {
     FuzzyNumber b;
     FuzzyFunction fun;
     int steps;
+    boolean isFullRes;
 
-    public FuzzyCondition(FuzzyNumber a, FuzzyNumber b, FuzzyFunction fun, int steps) {
+    public FuzzyCondition(FuzzyNumber a, FuzzyNumber b, FuzzyFunction fun, int steps, boolean isFullRes) {
         this.a = a;
         this.b = b;
         this.fun = fun;
         this.steps = steps;
+        this.isFullRes = isFullRes;
     }
 
     public FuzzyNumber getA() {
@@ -48,5 +50,24 @@ public class FuzzyCondition {
 
     public void setSteps(int steps) {
         this.steps = steps;
+    }
+
+    public boolean isFullRes() {
+        return isFullRes;
+    }
+
+    public void setFullRes(boolean fullRes) {
+        isFullRes = fullRes;
+    }
+
+    @Override
+    public String toString() {
+        return "FuzzyCondition{" +
+                "a=" + a +
+                ", b=" + b +
+                ", fun=" + fun +
+                ", steps=" + steps +
+                ", isFullRes=" + isFullRes +
+                '}';
     }
 }

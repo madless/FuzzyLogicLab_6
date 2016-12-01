@@ -8,8 +8,8 @@ import java.util.Comparator;
 public class FuzzyCellComparator implements Comparator<FuzzyCell> {
     @Override
     public int compare(FuzzyCell o1, FuzzyCell o2) {
-        if(o1.valueCoord == o2.valueCoord) {
-            return o1.min == o2.min ? 0 : o1.min > o2.min ? 1 : -1;
+        if(FuzzyHelper.compareIfEquals(o1.valueCoord, o2.valueCoord)) {
+            return FuzzyHelper.compareIfEquals(o1.min, o2.min) ? 0 : o1.min > o2.min ? 1 : -1;
 //            return 0;
         }
         if(o1.valueCoord > o2.valueCoord) {

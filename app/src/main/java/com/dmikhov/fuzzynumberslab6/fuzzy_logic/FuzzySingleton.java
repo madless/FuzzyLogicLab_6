@@ -22,9 +22,6 @@ public class FuzzySingleton {
 
     @Override
     public String toString() {
-        return "fuzzy_logic.FuzzySingleton{" +
-                "x=" + x +
-                ", valueCoord=" + value +
-                '}';
+        return value + "/" + x;
     }
 }

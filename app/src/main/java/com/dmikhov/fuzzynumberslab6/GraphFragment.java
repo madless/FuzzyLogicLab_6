@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCell;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCellComparator;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyLogic;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzySingleton;
 import com.dmikhov.fuzzynumberslab6.utils.Const;
 
@@ -52,40 +52,51 @@ public class GraphFragment extends Fragment {
         ArrayList<FuzzyCell> fuzzyList = null;
         ArrayList<FuzzySingleton> aSingletons = null;
         ArrayList<FuzzySingleton> bSingletons = null;
+        ArrayList<FuzzySingleton> smoothList = null;
 
-        float step = FuzzyLogic.getStep(fuzzyCondition.getA(), fuzzyCondition.getB(), fuzzyCondition.getSteps());
-        aSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getA(), step);
-        bSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getB(), step);
+        FuzzyNumber a = fuzzyCondition.getA();
+        FuzzyNumber b = fuzzyCondition.getB();
+        float step = FuzzyLogic.getStep(a, b, fuzzyCondition.getSteps());
+        aSingletons = FuzzyLogic.convertToSingletons(a, fuzzyCondition.getIndepFun(), step);
+        bSingletons = FuzzyLogic.convertToSingletons(b, fuzzyCondition.getIndepFun(), step);
         FuzzyCell[][] matrix = FuzzyLogic.convertToMatrix(aSingletons, bSingletons, fuzzyCondition.getFun());
         fuzzyList = FuzzyLogic.convertToSortedList(matrix);
         FuzzyLogic.filterList(fuzzyList);
 
-        List<PointValue> valuesC = new ArrayList<>();
-        for (int i = 0; i < fuzzyList.size(); i++) {
-            Log.w(Const.TAG, fuzzyList.get(i).toString());
-            PointValue p = new PointValue(fuzzyList.get(i).getValueCoord(), fuzzyList.get(i).getMin());
-            valuesC.add(p);
-            if(fuzzyCondition.isFullRes()) {
-                if (i != fuzzyList.size() - 1) {
-                    PointValue pHelper = new PointValue(fuzzyList.get(i + 1).getValueCoord(), fuzzyList.get(i).getMin());
-                    valuesC.add(pHelper);
+        List<PointValue> valuesC;
+        List<PointValue> valuesA;
+        List<PointValue> valuesB;
+        if(fuzzyCondition.isFullRes()) {
+            valuesC = new ArrayList<>();
+            for (int i = 0; i < fuzzyList.size(); i++) {
+                Log.w(Const.TAG, fuzzyList.get(i).toString());
+                PointValue p = new PointValue(fuzzyList.get(i).getValueCoord(), fuzzyList.get(i).getMin());
+                valuesC.add(p);
+                if(fuzzyCondition.isFullRes()) {
+                    if (i != fuzzyList.size() - 1) {
+                        PointValue pHelper = new PointValue(fuzzyList.get(i + 1).getValueCoord(), fuzzyList.get(i).getMin());
+                        valuesC.add(pHelper);
+                    }
                 }
             }
+            valuesA = getPoints(aSingletons, 0.02f, fuzzyCondition.isFullRes());
+            valuesB = getPoints(bSingletons, 0.04f, fuzzyCondition.isFullRes());
+        } else {
+            smoothList = FuzzyLogic.getSmoothCoordinatesList(fuzzyList);
+            valuesC = getPoints(smoothList, 0, fuzzyCondition.isFullRes());
+            valuesA = Arrays.asList(new PointValue(a.getX1(), 0), new PointValue(a.getX0(), 1), new PointValue(a.getX2(), 0));
+            valuesB = Arrays.asList(new PointValue(b.getX1(), 0), new PointValue(b.getX0(), 1), new PointValue(b.getX2(), 0));
         }
-        Line cLine = getLine(valuesC, Color.RED, 3);
-
-        List<PointValue> valuesA = getPoints(aSingletons, 0.02f, fuzzyCondition.isFullRes());
-        Line aLine = getLine(valuesA, Color.BLUE, 1);
-
-        List<PointValue> valuesB = getPoints(bSingletons, 0.04f, fuzzyCondition.isFullRes());
-        Line bLine = getLine(valuesB, Color.BLACK, 1);
+        Line cLine = getLine(valuesC, Color.RED, 3, !fuzzyCondition.isFullRes());
+        Line aLine = getLine(valuesA, Color.BLUE, 1, false);
+        Line bLine = getLine(valuesB, Color.BLACK, 1, false);
 
         initGraph(Arrays.asList(aLine, bLine, cLine));
     }
 
     private List<PointValue> getPoints(ArrayList<FuzzySingleton> singletons, float padding, boolean isFullResult) {
         List<PointValue> values = new ArrayList<>();
-        values.add(new PointValue(0, 0));
+//        values.add(new PointValue(0, 0));
         for (int i = 0; i < singletons.size(); i++) {
             Log.w(Const.TAG, singletons.get(i).toString());
             PointValue p = new PointValue(singletons.get(i).getX(), singletons.get(i).getValue());
@@ -100,10 +111,13 @@ public class GraphFragment extends Fragment {
         return values;
     }
 
-    private Line getLine(List<PointValue> values, int color, int width) {
+    private Line getLine(List<PointValue> values, int color, int width, boolean cubic) {
         Line line = new Line(values).setColor(color).setCubic(false);
         line.setStrokeWidth(width);
         line.setPointRadius(1);
+        if(cubic) {
+            line.setCubic(true);
+        }
         return line;
     }
 

@@ -44,8 +44,8 @@ public class TableFragment extends Fragment {
         FuzzyCondition fuzzyCondition = DataSingleton.get().getCondition();
 
         float step = FuzzyLogic.getStep(fuzzyCondition.getA(), fuzzyCondition.getB(), fuzzyCondition.getSteps());
-        ArrayList<FuzzySingleton> aSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getA(), step);
-        ArrayList<FuzzySingleton> bSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getB(), step);
+        ArrayList<FuzzySingleton> aSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getA(), fuzzyCondition.getIndepFun(), step);
+        ArrayList<FuzzySingleton> bSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getB(), fuzzyCondition.getIndepFun(), step);
         FuzzyCell[][] matrix = FuzzyLogic.convertToMatrix(aSingletons, bSingletons, fuzzyCondition.getFun());
         ArrayList<FuzzyCell> fuzzyList = FuzzyLogic.convertToSortedList(matrix);
         FuzzyLogic.filterList(fuzzyList);
@@ -72,7 +72,6 @@ public class TableFragment extends Fragment {
         tv.setPadding(15, 15, 15, 15);
         tv.setLayoutParams(params);
         tv.setGravity(Gravity.CENTER);
-        System.out.println(tv.getLayoutParams());
         tv.setBackground(ContextCompat.getDrawable(getContext(), R.color.colorGray));
         tv.setText(String.format(Locale.US, "%.2f", data));
         return tv;
@@ -85,7 +84,6 @@ public class TableFragment extends Fragment {
         tv.setPadding(20, 20, 20, 20);
         tv.setLayoutParams(params);
         tv.setGravity(Gravity.CENTER);
-        System.out.println(tv.getLayoutParams());
         tv.setBackground(ContextCompat.getDrawable(getContext(), R.color.colorGrayDark));
         tv.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
         tv.setText(title);

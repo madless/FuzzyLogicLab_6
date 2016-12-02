@@ -12,14 +12,16 @@ import android.widget.Toast;
 
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyNumber;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.DivFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.FuzzyFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.MaxFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.MinFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.MultFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.SubFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.SumFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.DivFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.MaxFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.MinFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.MultFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.SubFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.SumFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyHelper;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.IndependencyFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.TriangleIndependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.IntentHelper;
 import com.dmikhov.fuzzynumberslab6.utils.ValidationResponse;
 
@@ -60,19 +62,27 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FuzzyNumber a = getFuzzyNumber(etAX1, etAX0, etAX2);
-                FuzzyNumber b = getFuzzyNumber(etBX1, etBX0, etBX2);
-                FuzzyFunction fun = getSelectedFunction();
-                Integer steps = getSteps();
-                boolean isFullResult = isFullResult();
-                FuzzyCondition condition = new FuzzyCondition(a, b, fun, steps, isFullResult);
+                if(!etAX0.getText().toString().isEmpty() && !etAX1.getText().toString().isEmpty()
+                        && !etAX2.getText().toString().isEmpty() && !etBX0.getText().toString().isEmpty()
+                        && !etBX1.getText().toString().isEmpty() && !etBX2.getText().toString().isEmpty()
+                        && !etSteps.getText().toString().isEmpty()) {
+                    FuzzyNumber a = getFuzzyNumber(etAX1, etAX0, etAX2);
+                    FuzzyNumber b = getFuzzyNumber(etBX1, etBX0, etBX2);
+                    FuzzyFunction fun = getSelectedFunction();
+                    IndependencyFunction indepFun = new TriangleIndependencyFunction();
+                    Integer steps = getSteps();
+                    boolean isFullResult = isFullResult();
+                    FuzzyCondition condition = new FuzzyCondition(a, b, fun, indepFun, steps, isFullResult);
 
-                ValidationResponse validationResponse = FuzzyHelper.validate(condition);
-                if(validationResponse.isOk()) {
-                    DataSingleton.get().setCondition(condition);
-                    IntentHelper.startGraphActivity(MainActivity.this);
+                    ValidationResponse validationResponse = FuzzyHelper.validate(condition);
+                    if (validationResponse.isOk()) {
+                        DataSingleton.get().setCondition(condition);
+                        IntentHelper.startGraphActivity(MainActivity.this);
+                    } else {
+                        Toast.makeText(MainActivity.this, validationResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(MainActivity.this, validationResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Error! Please input all data", Toast.LENGTH_LONG).show();
                 }
             }
         });

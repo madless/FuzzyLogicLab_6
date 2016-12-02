@@ -1,6 +1,7 @@
 package com.dmikhov.fuzzynumberslab6.fuzzy_logic;
 
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_functions.DivFunction;
+
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.DivFunction;
 import com.dmikhov.fuzzynumberslab6.utils.Const;
 import com.dmikhov.fuzzynumberslab6.utils.ValidationResponse;
 

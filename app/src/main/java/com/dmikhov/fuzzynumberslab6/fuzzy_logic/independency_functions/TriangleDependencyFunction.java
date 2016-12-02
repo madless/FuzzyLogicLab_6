@@ -5,7 +5,7 @@ import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyNumber;
 /**
  * Created by dmikhov on 02.12.2016.
  */
-public class TriangleIndependencyFunction implements IndependencyFunction {
+public class TriangleDependencyFunction implements DependencyFunction {
     @Override
     public float getAlpha(FuzzyNumber fuzzy, float x) {
         if(x < fuzzy.getX0()) {

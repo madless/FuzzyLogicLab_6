@@ -1,7 +1,7 @@
 package com.dmikhov.fuzzynumberslab6.fuzzy_logic;
 
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.IndependencyFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.DependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.Const;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class FuzzyLogic {
         return dist / steps;
     }
 
-    public static ArrayList<FuzzySingleton> convertToSingletons(FuzzyNumber fuzzy, IndependencyFunction indepFun, float step) {
+    public static ArrayList<FuzzySingleton> convertToSingletons(FuzzyNumber fuzzy, DependencyFunction indepFun, float step) {
         ArrayList<FuzzySingleton> fuzzySingletons = new ArrayList<>();
         float x = fuzzy.getX1();
         float alpha = indepFun.getAlpha(fuzzy, x);

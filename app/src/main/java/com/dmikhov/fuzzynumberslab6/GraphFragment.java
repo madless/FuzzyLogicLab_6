@@ -14,6 +14,7 @@ import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyLogic;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzySingleton;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.TriangleDependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.Const;
 
 import java.util.ArrayList;
@@ -57,8 +58,8 @@ public class GraphFragment extends Fragment {
         FuzzyNumber a = fuzzyCondition.getA();
         FuzzyNumber b = fuzzyCondition.getB();
         float step = FuzzyLogic.getStep(a, b, fuzzyCondition.getSteps());
-        aSingletons = FuzzyLogic.convertToSingletons(a, fuzzyCondition.getIndepFun(), step);
-        bSingletons = FuzzyLogic.convertToSingletons(b, fuzzyCondition.getIndepFun(), step);
+        aSingletons = FuzzyLogic.convertToSingletons(a, fuzzyCondition.getDepFun(), step);
+        bSingletons = FuzzyLogic.convertToSingletons(b, fuzzyCondition.getDepFun(), step);
         FuzzyCell[][] matrix = FuzzyLogic.convertToMatrix(aSingletons, bSingletons, fuzzyCondition.getFun());
         fuzzyList = FuzzyLogic.convertToSortedList(matrix);
         FuzzyLogic.filterList(fuzzyList);
@@ -84,8 +85,13 @@ public class GraphFragment extends Fragment {
         } else {
             smoothList = FuzzyLogic.getSmoothCoordinatesList(fuzzyList);
             valuesC = getPoints(smoothList, 0, fuzzyCondition.isFullRes());
-            valuesA = Arrays.asList(new PointValue(a.getX1(), 0), new PointValue(a.getX0(), 1), new PointValue(a.getX2(), 0));
-            valuesB = Arrays.asList(new PointValue(b.getX1(), 0), new PointValue(b.getX0(), 1), new PointValue(b.getX2(), 0));
+            if(fuzzyCondition.getDepFun() instanceof TriangleDependencyFunction) {
+                valuesA = Arrays.asList(new PointValue(a.getX1(), 0), new PointValue(a.getX0(), 1), new PointValue(a.getX2(), 0));
+                valuesB = Arrays.asList(new PointValue(b.getX1(), 0), new PointValue(b.getX0(), 1), new PointValue(b.getX2(), 0));
+            } else {
+                valuesA = getPoints(aSingletons, 0.02f, fuzzyCondition.isFullRes());
+                valuesB = getPoints(bSingletons, 0.04f, fuzzyCondition.isFullRes());
+            }
         }
         Line cLine = getLine(valuesC, Color.RED, 3, !fuzzyCondition.isFullRes());
         Line aLine = getLine(valuesA, Color.BLUE, 1, false);

@@ -1,7 +1,7 @@
 package com.dmikhov.fuzzynumberslab6.fuzzy_logic;
 
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.IndependencyFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.DependencyFunction;
 
 /**
  * Created by dmikhov on 30.11.2016.
@@ -10,15 +10,15 @@ public class FuzzyCondition {
     FuzzyNumber a;
     FuzzyNumber b;
     FuzzyFunction fun;
-    IndependencyFunction indepFun;
+    DependencyFunction depFun;
     int steps;
     boolean isFullRes;
 
-    public FuzzyCondition(FuzzyNumber a, FuzzyNumber b, FuzzyFunction fun, IndependencyFunction indepFun, int steps, boolean isFullRes) {
+    public FuzzyCondition(FuzzyNumber a, FuzzyNumber b, FuzzyFunction fun, DependencyFunction depFun, int steps, boolean isFullRes) {
         this.a = a;
         this.b = b;
         this.fun = fun;
-        this.indepFun = indepFun;
+        this.depFun = depFun;
         this.steps = steps;
         this.isFullRes = isFullRes;
     }
@@ -63,12 +63,12 @@ public class FuzzyCondition {
         isFullRes = fullRes;
     }
 
-    public IndependencyFunction getIndepFun() {
-        return indepFun;
+    public DependencyFunction getDepFun() {
+        return depFun;
     }
 
-    public void setIndepFun(IndependencyFunction indepFun) {
-        this.indepFun = indepFun;
+    public void setDepFun(DependencyFunction depFun) {
+        this.depFun = depFun;
     }
 
     @Override

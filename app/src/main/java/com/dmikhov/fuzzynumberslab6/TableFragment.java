@@ -44,8 +44,8 @@ public class TableFragment extends Fragment {
         FuzzyCondition fuzzyCondition = DataSingleton.get().getCondition();
 
         float step = FuzzyLogic.getStep(fuzzyCondition.getA(), fuzzyCondition.getB(), fuzzyCondition.getSteps());
-        ArrayList<FuzzySingleton> aSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getA(), fuzzyCondition.getIndepFun(), step);
-        ArrayList<FuzzySingleton> bSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getB(), fuzzyCondition.getIndepFun(), step);
+        ArrayList<FuzzySingleton> aSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getA(), fuzzyCondition.getDepFun(), step);
+        ArrayList<FuzzySingleton> bSingletons = FuzzyLogic.convertToSingletons(fuzzyCondition.getB(), fuzzyCondition.getDepFun(), step);
         FuzzyCell[][] matrix = FuzzyLogic.convertToMatrix(aSingletons, bSingletons, fuzzyCondition.getFun());
         ArrayList<FuzzyCell> fuzzyList = FuzzyLogic.convertToSortedList(matrix);
         FuzzyLogic.filterList(fuzzyList);

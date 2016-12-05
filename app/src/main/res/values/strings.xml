@@ -3,7 +3,7 @@
 
     <string name="fuzzy_triangle">Трикутна функцiя</string>
     <string name="fuzzy_gauss">Симетрична гаусiвська функцiя</string>
-    <string name="fuzzy_cubic">Кубiчна функцiя</string>
+    <string name="fuzzy_cubic">Квадратична функцiя</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

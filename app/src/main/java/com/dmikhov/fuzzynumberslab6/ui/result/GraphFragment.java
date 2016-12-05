@@ -1,4 +1,4 @@
-package com.dmikhov.fuzzynumberslab6;
+package com.dmikhov.fuzzynumberslab6.ui.result;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dmikhov.fuzzynumberslab6.DataSingleton;
+import com.dmikhov.fuzzynumberslab6.R;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCell;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyLogic;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyNumber;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzySingleton;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.TriangleDependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.Const;

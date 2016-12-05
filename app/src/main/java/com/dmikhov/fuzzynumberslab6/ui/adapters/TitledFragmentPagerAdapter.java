@@ -1,4 +1,4 @@
-package com.dmikhov.fuzzynumberslab6;
+package com.dmikhov.fuzzynumberslab6.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * Created by dmikhov on 01.12.2016.
  */
-public class ResultFragmentPagerAdapter extends FragmentPagerAdapter {
+public class TitledFragmentPagerAdapter extends FragmentPagerAdapter {
 
     ArrayList<Fragment> fragments = null;
     ArrayList<String> titles = null;
 
-    public ResultFragmentPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles) {
+    public TitledFragmentPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles) {
         super(fm);
         this.fragments = fragments;
         this.titles = titles;

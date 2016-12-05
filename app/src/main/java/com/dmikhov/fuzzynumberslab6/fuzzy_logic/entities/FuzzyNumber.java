@@ -1,4 +1,4 @@
-package com.dmikhov.fuzzynumberslab6.fuzzy_logic;
+package com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities;
 
 /**
  * Created by dmikhov on 30.11.2016.

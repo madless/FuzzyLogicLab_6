@@ -1,8 +1,11 @@
-package com.dmikhov.fuzzynumberslab6;
+package com.dmikhov.fuzzynumberslab6.ui.main;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -10,9 +13,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.dmikhov.fuzzynumberslab6.DataSingleton;
+import com.dmikhov.fuzzynumberslab6.R;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyHelper;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyNumber;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.DivFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.MaxFunction;
@@ -28,8 +33,10 @@ import com.dmikhov.fuzzynumberslab6.utils.ValidationResponse;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
-
+/**
+ * Created by dmikhov on 02.12.2016.
+ */
+public class InputTriangleFragment extends Fragment implements CompoundButton.OnCheckedChangeListener  {
     @Bind(R.id.buttonCalculate) Button buttonCalculate;
     @Bind(R.id.cbFullRes) CheckBox cbFullRes;
     @Bind(R.id.etAX0) EditText etAX0;
@@ -46,12 +53,17 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     @Bind(R.id.rbSub) RadioButton rbSub;
     @Bind(R.id.rbSum) RadioButton rbSum;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_input_triangle, container, false);
+        ButterKnife.bind(this, root);
+        return root;
+    }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         rbMax.setOnCheckedChangeListener(this);
         rbMin.setOnCheckedChangeListener(this);
         rbMult.setOnCheckedChangeListener(this);
@@ -77,12 +89,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                     ValidationResponse validationResponse = FuzzyHelper.validate(condition);
                     if (validationResponse.isOk()) {
                         DataSingleton.get().setCondition(condition);
-                        IntentHelper.startGraphActivity(MainActivity.this);
+                        IntentHelper.startGraphActivity(getActivity());
                     } else {
-                        Toast.makeText(MainActivity.this, validationResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), validationResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "Error! Please input all data", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Error! Please input all data", Toast.LENGTH_LONG).show();
                 }
             }
         });

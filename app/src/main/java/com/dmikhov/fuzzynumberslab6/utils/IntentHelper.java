@@ -3,7 +3,7 @@ package com.dmikhov.fuzzynumberslab6.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.dmikhov.fuzzynumberslab6.ResultActivity;
+import com.dmikhov.fuzzynumberslab6.ui.result.ResultActivity;
 
 /**
  * Created by dmikhov on 30.11.2016.

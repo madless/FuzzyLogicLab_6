@@ -1,4 +1,4 @@
-package com.dmikhov.fuzzynumberslab6;
+package com.dmikhov.fuzzynumberslab6.ui.result;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +12,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.dmikhov.fuzzynumberslab6.DataSingleton;
+import com.dmikhov.fuzzynumberslab6.R;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCell;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyLogic;

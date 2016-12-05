@@ -1,5 +1,6 @@
 package com.dmikhov.fuzzynumberslab6.fuzzy_logic;
 
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.DependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.Const;

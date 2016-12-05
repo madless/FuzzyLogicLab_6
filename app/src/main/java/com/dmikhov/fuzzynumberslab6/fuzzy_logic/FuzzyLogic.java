@@ -1,5 +1,7 @@
 package com.dmikhov.fuzzynumberslab6.fuzzy_logic;
 
+import android.util.Log;
+
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.DependencyFunction;
@@ -15,21 +17,22 @@ import java.util.List;
 public class FuzzyLogic {
 
     public static float getStep(FuzzyNumber a, FuzzyNumber b, int steps) {
-        float aDist = a.getX2() - a.getX1();
-        float bDist = b.getX2() - b.getX1();
+        float aDist = a.getRightBorder() - a.getLeftBorder();
+        float bDist = b.getRightBorder() - b.getLeftBorder();
         float dist = aDist < bDist ? aDist : bDist;
+        Log.d(Const.TAG, "dist: " + dist);
         return dist / steps;
     }
 
     public static ArrayList<FuzzySingleton> convertToSingletons(FuzzyNumber fuzzy, DependencyFunction indepFun, float step) {
         ArrayList<FuzzySingleton> fuzzySingletons = new ArrayList<>();
-        float x = fuzzy.getX1();
+        float x = fuzzy.getLeftBorder();
         float alpha = indepFun.getAlpha(fuzzy, x);
         fuzzySingletons.add(new FuzzySingleton(x, alpha));
-        while (x < fuzzy.getX2() && (Math.abs(x - fuzzy.getX2()) > Const.EPSILON)) {
+        while (x < fuzzy.getRightBorder() && (Math.abs(x - fuzzy.getRightBorder()) > Const.EPSILON)) {
             x += step;
-            if(x > fuzzy.getX2() && (Math.abs(x - fuzzy.getX2()) > Const.EPSILON)) {
-                x = fuzzy.getX2();
+            if(x > fuzzy.getRightBorder() && (Math.abs(x - fuzzy.getRightBorder()) > Const.EPSILON)) {
+                x = fuzzy.getRightBorder();
             }
             alpha = indepFun.getAlpha(fuzzy, x);
             fuzzySingletons.add(new FuzzySingleton(x, alpha));
@@ -100,6 +103,7 @@ public class FuzzyLogic {
                 }
             }
         }
+        System.out.println(" ");
         smoothList.add(new FuzzySingleton(filteredList.get(filteredList.size() - 1).getValueCoord(), filteredList.get(filteredList.size() - 1).getMin())); // last
         return smoothList;
     }

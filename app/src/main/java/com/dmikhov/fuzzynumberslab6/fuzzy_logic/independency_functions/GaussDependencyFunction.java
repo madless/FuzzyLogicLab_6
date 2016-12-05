@@ -8,6 +8,6 @@ import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 public class GaussDependencyFunction implements DependencyFunction {
     @Override
     public float getAlpha(FuzzyNumber fuzzy, float x) {
-        return (float) Math.exp(-(x * x)/(2 * fuzzy.getX0() * fuzzy.getX0()));
+        return (float) Math.exp(-(x * x )/ (2 * fuzzy.getMaxValue() * fuzzy.getMaxValue()));
     }
 }

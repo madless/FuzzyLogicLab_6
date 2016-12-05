@@ -1,2 +1,0 @@
-@Bind(R.id.tabs) TabLayout tabs;
-@Bind(R.id.viewPager) ViewPager viewPager;

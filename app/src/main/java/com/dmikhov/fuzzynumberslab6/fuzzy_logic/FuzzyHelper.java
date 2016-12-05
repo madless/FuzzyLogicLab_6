@@ -10,8 +10,9 @@ import com.dmikhov.fuzzynumberslab6.utils.ValidationResponse;
  * Created by dmikhov on 01.12.2016.
  */
 public class FuzzyHelper {
+
     public static ValidationResponse validate(FuzzyCondition con) {
-        if(con.getFun() instanceof DivFunction && (con.getB().getX0() == 0 || con.getB().getX1() == 0 || con.getB().getX2() == 0)) {
+        if(con.getFun() instanceof DivFunction && ((con.getB().getMaxValue() == 0 || con.getB().getLeftBorder() == 0 || con.getB().getRightBorder() == 0))) {
             return new ValidationResponse(false, "Error! Dividing by zero");
         } else if(!validateFuzzyNumber(con.getA())) {
             return new ValidationResponse(false, "Error! Fuzzy number A is not valid");
@@ -24,7 +25,7 @@ public class FuzzyHelper {
     }
 
     public static boolean validateFuzzyNumber(FuzzyNumber number) {
-        return number.getX1() < number.getX0() & number.getX1() < number.getX2() & number.getX0() < number.getX2();
+        return number.getLeftBorder() < number.getMaxValue() & number.getLeftBorder() < number.getRightBorder() & number.getMaxValue() < number.getRightBorder();
     }
 
     public static boolean compareIfEquals(float a, float b) {

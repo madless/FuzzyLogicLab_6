@@ -72,7 +72,7 @@ public class GraphFragment extends Fragment {
         if(fuzzyCondition.isFullRes()) {
             valuesC = new ArrayList<>();
             for (int i = 0; i < fuzzyList.size(); i++) {
-                Log.w(Const.TAG, fuzzyList.get(i).toString());
+                Log.w(Const.TAG, "p: " + fuzzyList.get(i).toString());
                 PointValue p = new PointValue(fuzzyList.get(i).getValueCoord(), fuzzyList.get(i).getMin());
                 valuesC.add(p);
                 if(fuzzyCondition.isFullRes()) {
@@ -82,14 +82,15 @@ public class GraphFragment extends Fragment {
                     }
                 }
             }
+            Log.w(Const.TAG, "--------------------------");
             valuesA = getPoints(aSingletons, 0.02f, fuzzyCondition.isFullRes());
             valuesB = getPoints(bSingletons, 0.04f, fuzzyCondition.isFullRes());
         } else {
             smoothList = FuzzyLogic.getSmoothCoordinatesList(fuzzyList);
             valuesC = getPoints(smoothList, 0, fuzzyCondition.isFullRes());
             if(fuzzyCondition.getDepFun() instanceof TriangleDependencyFunction) {
-                valuesA = Arrays.asList(new PointValue(a.getX1(), 0), new PointValue(a.getX0(), 1), new PointValue(a.getX2(), 0));
-                valuesB = Arrays.asList(new PointValue(b.getX1(), 0), new PointValue(b.getX0(), 1), new PointValue(b.getX2(), 0));
+                valuesA = Arrays.asList(new PointValue(a.getLeftBorder(), 0), new PointValue(a.getMaxValue(), 1), new PointValue(a.getRightBorder(), 0));
+                valuesB = Arrays.asList(new PointValue(b.getLeftBorder(), 0), new PointValue(b.getMaxValue(), 1), new PointValue(b.getRightBorder(), 0));
             } else {
                 valuesA = getPoints(aSingletons, 0.02f, fuzzyCondition.isFullRes());
                 valuesB = getPoints(bSingletons, 0.04f, fuzzyCondition.isFullRes());
@@ -106,7 +107,7 @@ public class GraphFragment extends Fragment {
         List<PointValue> values = new ArrayList<>();
 //        values.add(new PointValue(0, 0));
         for (int i = 0; i < singletons.size(); i++) {
-            Log.w(Const.TAG, singletons.get(i).toString());
+            Log.w(Const.TAG, "p: " + singletons.get(i).toString());
             PointValue p = new PointValue(singletons.get(i).getX(), singletons.get(i).getValue());
             values.add(p);
             if(isFullResult) {
@@ -116,6 +117,7 @@ public class GraphFragment extends Fragment {
                 }
             }
         }
+        Log.w(Const.TAG, "-----------------------------");
         return values;
     }
 

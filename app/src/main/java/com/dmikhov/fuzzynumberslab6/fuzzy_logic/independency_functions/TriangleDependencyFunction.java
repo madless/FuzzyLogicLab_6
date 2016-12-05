@@ -8,14 +8,14 @@ import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 public class TriangleDependencyFunction implements DependencyFunction {
     @Override
     public float getAlpha(FuzzyNumber fuzzy, float x) {
-        if(x < fuzzy.getX0()) {
-            return (x - fuzzy.getX1()) / (fuzzy.getX0() - fuzzy.getX1());
+        if(x < fuzzy.getMaxValue()) {
+            return (x - fuzzy.getLeftBorder()) / (fuzzy.getMaxValue() - fuzzy.getLeftBorder());
         }
-        if(x == fuzzy.getX0()) {
+        if(x == fuzzy.getMaxValue()) {
             return 1;
         }
-        if(x > fuzzy.getX0()) {
-            return (fuzzy.getX2() - x) / (fuzzy.getX2() - fuzzy.getX0());
+        if(x > fuzzy.getMaxValue()) {
+            return (fuzzy.getRightBorder() - x) / (fuzzy.getRightBorder() - fuzzy.getMaxValue());
         }
         throw new RuntimeException();
     }

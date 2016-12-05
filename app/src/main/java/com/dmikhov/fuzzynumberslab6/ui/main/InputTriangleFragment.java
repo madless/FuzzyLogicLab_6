@@ -2,15 +2,11 @@ package com.dmikhov.fuzzynumberslab6.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.dmikhov.fuzzynumberslab6.DataSingleton;
@@ -18,15 +14,10 @@ import com.dmikhov.fuzzynumberslab6.R;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyHelper;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.DivFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.TriangleNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.MaxFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.MinFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.MultFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.SubFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.SumFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.DependencyFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.GaussDependencyFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.TriangleDependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.IntentHelper;
 import com.dmikhov.fuzzynumberslab6.utils.ValidationResponse;
 
@@ -36,22 +27,13 @@ import butterknife.ButterKnife;
 /**
  * Created by dmikhov on 02.12.2016.
  */
-public class InputTriangleFragment extends Fragment implements CompoundButton.OnCheckedChangeListener  {
-    @Bind(R.id.buttonCalculate) Button buttonCalculate;
-    @Bind(R.id.cbFullRes) CheckBox cbFullRes;
+public class InputTriangleFragment extends BaseInputFragment implements CompoundButton.OnCheckedChangeListener  {
     @Bind(R.id.etAX0) EditText etAX0;
     @Bind(R.id.etAX1) EditText etAX1;
     @Bind(R.id.etAX2) EditText etAX2;
     @Bind(R.id.etBX0) EditText etBX0;
     @Bind(R.id.etBX1) EditText etBX1;
     @Bind(R.id.etBX2) EditText etBX2;
-    @Bind(R.id.etSteps) EditText etSteps;
-    @Bind(R.id.rbDivide) RadioButton rbDivide;
-    @Bind(R.id.rbMax) RadioButton rbMax;
-    @Bind(R.id.rbMin) RadioButton rbMin;
-    @Bind(R.id.rbMult) RadioButton rbMult;
-    @Bind(R.id.rbSub) RadioButton rbSub;
-    @Bind(R.id.rbSum) RadioButton rbSum;
 
     @Nullable
     @Override
@@ -78,10 +60,10 @@ public class InputTriangleFragment extends Fragment implements CompoundButton.On
                         && !etAX2.getText().toString().isEmpty() && !etBX0.getText().toString().isEmpty()
                         && !etBX1.getText().toString().isEmpty() && !etBX2.getText().toString().isEmpty()
                         && !etSteps.getText().toString().isEmpty()) {
-                    FuzzyNumber a = getFuzzyNumber(etAX1, etAX0, etAX2);
-                    FuzzyNumber b = getFuzzyNumber(etBX1, etBX0, etBX2);
+                    FuzzyNumber a = getTriangleNumber(etAX1, etAX0, etAX2);
+                    FuzzyNumber b = getTriangleNumber(etBX1, etBX0, etBX2);
                     FuzzyFunction fun = getSelectedFunction();
-                    DependencyFunction depFun = new GaussDependencyFunction();
+                    DependencyFunction depFun = new TriangleDependencyFunction();
                     Integer steps = getSteps();
                     boolean isFullResult = isFullResult();
                     FuzzyCondition condition = new FuzzyCondition(a, b, fun, depFun, steps, isFullResult);
@@ -100,41 +82,10 @@ public class InputTriangleFragment extends Fragment implements CompoundButton.On
         });
     }
 
-    public boolean isFullResult() {
-        return cbFullRes.isChecked();
-    }
-
-    public Integer getSteps() {
-        return Integer.valueOf(etSteps.getText().toString());
-    }
-
-    public FuzzyNumber getFuzzyNumber(EditText etX1, EditText etX0, EditText etX2) {
+    public FuzzyNumber getTriangleNumber(EditText etX1, EditText etX0, EditText etX2) {
         int x1 = Integer.valueOf(etX1.getText().toString());
         int x0 = Integer.valueOf(etX0.getText().toString());
         int x2 = Integer.valueOf(etX2.getText().toString());
-        return new FuzzyNumber(x1, x0, x2);
-    }
-
-    public FuzzyFunction getSelectedFunction() {
-        if(rbMax.isChecked()) return new MaxFunction();
-        if(rbDivide.isChecked()) return new DivFunction();
-        if(rbMin.isChecked()) return new MinFunction();
-        if(rbMult.isChecked()) return new MultFunction();
-        if(rbSub.isChecked()) return new SubFunction();
-        if(rbSum.isChecked()) return new SumFunction();
-        throw new RuntimeException();
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if(b) {
-            rbMax.setChecked(false);
-            rbMin.setChecked(false);
-            rbMult.setChecked(false);
-            rbSub.setChecked(false);
-            rbSum.setChecked(false);
-            rbDivide.setChecked(false);
-            compoundButton.setChecked(true);
-        }
+        return new TriangleNumber(x1, x0, x2);
     }
 }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment gaussFragment = new InputGaussFragment();
         Fragment triangleFragment = new InputTriangleFragment();
         ArrayList<Fragment> fragments = new ArrayList<>(Arrays.asList(triangleFragment, gaussFragment, cubicFragment));
-        ArrayList<String> titles = new ArrayList<>(Arrays.asList("Triangle", "GaussNumber", "Cubic"));
+        ArrayList<String> titles = new ArrayList<>(Arrays.asList("Triangle", "Gauss", "Cubic"));
         adapter = new TitledFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
         tabs.setupWithViewPager(viewPager);

@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.dmikhov.fuzzynumberslab6.R;
 import com.dmikhov.fuzzynumberslab6.ui.adapters.TitledFragmentPagerAdapter;
-import com.dmikhov.fuzzynumberslab6.ui.result.GraphFragment;
-import com.dmikhov.fuzzynumberslab6.ui.result.TableFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +38,7 @@ public class ResultActivity extends AppCompatActivity {
         Fragment fragmentGraph = new GraphFragment();
         Fragment fragmentTable = new TableFragment();
         ArrayList<Fragment> fragments = new ArrayList<>(Arrays.asList(fragmentGraph, fragmentTable));
-        ArrayList<String> titles = new ArrayList<>(Arrays.asList("Graph", "Table"));
+        ArrayList<String> titles = new ArrayList<>(Arrays.asList(getString(R.string.graph), getString(R.string.table)));
         adapter = new TitledFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
         tabs.setupWithViewPager(viewPager);

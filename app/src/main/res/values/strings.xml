@@ -1,12 +1,28 @@
 <resources>
-    <string name="app_name">Lab 6 (7)</string>
+    <string name="app_name">Fuzzy Convolution</string>
+
+    <string name="fuzzy_triangle">Трикутна функцiя</string>
+    <string name="fuzzy_gauss">Симетрична гаусiвська функцiя</string>
+    <string name="fuzzy_cubic">Кубiчна функцiя</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget dui eget ex aliquam aliquam. In mollis lectus nec quam mollis, sit amet lacinia risus vehicula. Duis ultrices pulvinar urna, id sollicitudin justo ullamcorper eu. Vestibulum ut est mauris. Duis in neque sit amet leo vestibulum molestie sit amet vel ante. In laoreet nibh nec interdum dapibus. Pellentesque porttitor eu sapien sed venenatis. Aenean pharetra arcu nisl, ac rhoncus lacus feugiat vel. Etiam interdum orci eget ultrices scelerisque. Proin venenatis nunc vitae nisl accumsan, sed ultricies justo tincidunt. Nunc aliquam est in magna sagittis, ac viverra eros venenatis. Quisque vel turpis malesuada, rhoncus libero vel, accumsan lacus.
+        In hendrerit tempus tortor in porta. Ut maximus cursus ultrices. In luctus neque id sem dictum porta. Maecenas at lectus turpis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec velit urna, pulvinar a facilisis eget, venenatis nec ante. Proin blandit nunc ut risus tristique, convallis consectetur tortor tincidunt. Donec ac justo bibendum, finibus nisi ac, vulputate velit.
+        Nam rhoncus ante ut ex sagittis volutpat. Curabitur mollis ullamcorper enim sit amet posuere. Donec vitae metus commodo, mollis ex nec, dictum elit. Ut tristique fringilla pharetra. In rhoncus nec eros id bibendum. Duis iaculis dictum justo eu sagittis. Fusce hendrerit egestas metus, ultricies mattis risus porttitor id. In tincidunt dignissim accumsan. Aliquam erat volutpat. Morbi rhoncus tellus iaculis, cursus nunc et, malesuada ex. Duis elit lorem, lobortis a orci quis, pharetra facilisis purus. Suspendisse sagittis commodo dictum. Nam rhoncus quam in tincidunt finibus. Sed fermentum, est in imperdiet euismod, odio erat consequat nibh, eget sollicitudin libero est sit amet neque.
+        Cras laoreet sit amet lorem nec volutpat. Morbi eu metus eu dolor consectetur pellentesque. Nulla a ornare quam, vel mattis urna. Sed accumsan diam velit, quis convallis orci viverra vitae. Nam aliquam, felis elementum molestie convallis, ligula dolor consectetur libero, sit amet eleifend nibh nisl a velit. Nullam suscipit lorem eget libero convallis, ac mollis ligula consequat. Vivamus ornare, quam id molestie consectetur, orci turpis tempus dui, non mattis arcu ante ut quam. Donec blandit venenatis sapien, quis auctor dolor dapibus egestas. Phasellus eget neque felis. Praesent sollicitudin neque nec dui auctor pellentesque. Suspendisse vulputate tortor mauris, quis condimentum ligula viverra vel. Donec a facilisis est. In lacus eros, placerat non lacinia vitae, finibus cursus libero. Maecenas auctor auctor viverra. In ultricies mauris et justo lacinia, quis fringilla nisl rutrum.
+        Maecenas nec justo diam. Aliquam ut tellus eu ipsum feugiat congue. Mauris tincidunt dui ut accumsan vehicula. Quisque ultricies augue facilisis sapien volutpat molestie. Morbi luctus iaculis lorem. Integer nec tortor tristique, mollis dolor vel, placerat felis. Nunc ultricies dui ut metus tincidunt, eget tincidunt justo tincidunt.</string>
 
-In hendrerit tempus tortor in porta. Ut maximus cursus ultrices. In luctus neque id sem dictum porta. Maecenas at lectus turpis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec velit urna, pulvinar a facilisis eget, venenatis nec ante. Proin blandit nunc ut risus tristique, convallis consectetur tortor tincidunt. Donec ac justo bibendum, finibus nisi ac, vulputate velit.
+    <string name="sum">Сума</string>
+    <string name="substract">Вiднiмання</string>
+    <string name="mult">Множення</string>
+    <string name="divide">Дiлення</string>
+    <string name="min">Мiнiмум</string>
+    <string name="max">Максимум</string>
+    <string name="full_result">Повний результат</string>
+    <string name="steps">К-сть крокiв:</string>
 
-Nam rhoncus ante ut ex sagittis volutpat. Curabitur mollis ullamcorper enim sit amet posuere. Donec vitae metus commodo, mollis ex nec, dictum elit. Ut tristique fringilla pharetra. In rhoncus nec eros id bibendum. Duis iaculis dictum justo eu sagittis. Fusce hendrerit egestas metus, ultricies mattis risus porttitor id. In tincidunt dignissim accumsan. Aliquam erat volutpat. Morbi rhoncus tellus iaculis, cursus nunc et, malesuada ex. Duis elit lorem, lobortis a orci quis, pharetra facilisis purus. Suspendisse sagittis commodo dictum. Nam rhoncus quam in tincidunt finibus. Sed fermentum, est in imperdiet euismod, odio erat consequat nibh, eget sollicitudin libero est sit amet neque.
-
-Cras laoreet sit amet lorem nec volutpat. Morbi eu metus eu dolor consectetur pellentesque. Nulla a ornare quam, vel mattis urna. Sed accumsan diam velit, quis convallis orci viverra vitae. Nam aliquam, felis elementum molestie convallis, ligula dolor consectetur libero, sit amet eleifend nibh nisl a velit. Nullam suscipit lorem eget libero convallis, ac mollis ligula consequat. Vivamus ornare, quam id molestie consectetur, orci turpis tempus dui, non mattis arcu ante ut quam. Donec blandit venenatis sapien, quis auctor dolor dapibus egestas. Phasellus eget neque felis. Praesent sollicitudin neque nec dui auctor pellentesque. Suspendisse vulputate tortor mauris, quis condimentum ligula viverra vel. Donec a facilisis est. In lacus eros, placerat non lacinia vitae, finibus cursus libero. Maecenas auctor auctor viverra. In ultricies mauris et justo lacinia, quis fringilla nisl rutrum.
-
-Maecenas nec justo diam. Aliquam ut tellus eu ipsum feugiat congue. Mauris tincidunt dui ut accumsan vehicula. Quisque ultricies augue facilisis sapien volutpat molestie. Morbi luctus iaculis lorem. Integer nec tortor tristique, mollis dolor vel, placerat felis. Nunc ultricies dui ut metus tincidunt, eget tincidunt justo tincidunt.</string>
+    <string name="graph">Графiк</string>
+    <string name="table">Таблиця</string>
 </resources>

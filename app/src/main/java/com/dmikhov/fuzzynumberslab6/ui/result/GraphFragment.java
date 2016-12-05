@@ -1,9 +1,9 @@
 package com.dmikhov.fuzzynumberslab6.ui.result;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +14,8 @@ import com.dmikhov.fuzzynumberslab6.R;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCell;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyLogic;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzySingleton;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.GaussNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.DivFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.TriangleDependencyFunction;
@@ -99,9 +99,9 @@ public class GraphFragment extends Fragment {
             }
         }
         boolean isCLineCubic = !fuzzyCondition.isFullRes() && !((a instanceof GaussNumber) && (fuzzyCondition.getFun() instanceof DivFunction));
-        Line cLine = getLine(valuesC, Color.RED, 3, isCLineCubic);
-        Line aLine = getLine(valuesA, Color.BLUE, 1, false);
-        Line bLine = getLine(valuesB, Color.BLACK, 1, false);
+        Line cLine = getLine(valuesC, ContextCompat.getColor(getContext(), R.color.colorPrimaryDark), 3, isCLineCubic);
+        Line aLine = getLine(valuesA, ContextCompat.getColor(getContext(), R.color.colorAccent), 1, false);
+        Line bLine = getLine(valuesB, ContextCompat.getColor(getContext(), R.color.colorPrimaryLight), 1, false);
 
         initGraph(Arrays.asList(aLine, bLine, cLine));
     }

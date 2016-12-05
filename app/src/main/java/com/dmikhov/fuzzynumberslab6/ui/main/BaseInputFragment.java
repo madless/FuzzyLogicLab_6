@@ -2,9 +2,9 @@ package com.dmikhov.fuzzynumberslab6.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -23,7 +23,7 @@ import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.SumFunction
  * Created by dmikhov on 05.12.2016.
  */
 public class BaseInputFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
-    protected Button buttonCalculate;
+    protected FloatingActionButton buttonCalculate;
     protected CheckBox cbFullRes;
     protected EditText etSteps;
     protected RadioButton rbDivide;
@@ -36,7 +36,7 @@ public class BaseInputFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        buttonCalculate = (Button) view.findViewById(R.id.buttonCalculate);
+        buttonCalculate = (FloatingActionButton) view.findViewById(R.id.buttonCalculate);
         cbFullRes = (CheckBox) view.findViewById(R.id.cbFullRes);
         etSteps = (EditText) view.findViewById(R.id.etSteps);
         rbDivide = (RadioButton) view.findViewById(R.id.rbDivide);

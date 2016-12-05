@@ -75,7 +75,7 @@ public class TableFragment extends Fragment {
         tv.setLayoutParams(params);
         tv.setGravity(Gravity.CENTER);
         tv.setBackground(ContextCompat.getDrawable(getContext(), R.color.colorGray));
-        tv.setText(String.format(Locale.US, "%.2f", data));
+        tv.setText(String.format(Locale.US, "%.3f", data));
         return tv;
     }
 

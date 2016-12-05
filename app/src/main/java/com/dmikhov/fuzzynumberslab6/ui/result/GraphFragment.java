@@ -16,6 +16,8 @@ import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyCondition;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyLogic;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzySingleton;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.GaussNumber;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.DivFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.TriangleDependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.Const;
 
@@ -96,7 +98,8 @@ public class GraphFragment extends Fragment {
                 valuesB = getPoints(bSingletons, 0.04f, fuzzyCondition.isFullRes());
             }
         }
-        Line cLine = getLine(valuesC, Color.RED, 3, !fuzzyCondition.isFullRes());
+        boolean isCLineCubic = !fuzzyCondition.isFullRes() && !((a instanceof GaussNumber) && (fuzzyCondition.getFun() instanceof DivFunction));
+        Line cLine = getLine(valuesC, Color.RED, 3, isCLineCubic);
         Line aLine = getLine(valuesA, Color.BLUE, 1, false);
         Line bLine = getLine(valuesB, Color.BLACK, 1, false);
 

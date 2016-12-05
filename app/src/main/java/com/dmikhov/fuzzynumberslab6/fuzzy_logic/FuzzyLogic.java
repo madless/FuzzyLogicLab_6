@@ -29,7 +29,9 @@ public class FuzzyLogic {
         float x = fuzzy.getLeftBorder();
         float alpha = indepFun.getAlpha(fuzzy, x);
         fuzzySingletons.add(new FuzzySingleton(x, alpha));
-        while (x < fuzzy.getRightBorder() && (Math.abs(x - fuzzy.getRightBorder()) > Const.EPSILON)) {
+        System.out.println("step: " + step);
+        System.out.println("eps: " + Const.EPSILON);
+        while (x < fuzzy.getRightBorder() && (Math.abs(x - fuzzy.getRightBorder()) > Const.EPSILON) && step > 0) {
             x += step;
             if(x > fuzzy.getRightBorder() && (Math.abs(x - fuzzy.getRightBorder()) > Const.EPSILON)) {
                 x = fuzzy.getRightBorder();

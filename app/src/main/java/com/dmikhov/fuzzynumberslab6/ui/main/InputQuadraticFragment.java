@@ -16,7 +16,7 @@ import com.dmikhov.fuzzynumberslab6.fuzzy_logic.FuzzyHelper;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.CubicNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.entities.FuzzyNumber;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.fuzzy_math_functions.FuzzyFunction;
-import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.CubicDependencyFunction;
+import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.QuadraticDependencyFunction;
 import com.dmikhov.fuzzynumberslab6.fuzzy_logic.independency_functions.DependencyFunction;
 import com.dmikhov.fuzzynumberslab6.utils.Const;
 import com.dmikhov.fuzzynumberslab6.utils.IntentHelper;
@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * Created by dmikhov on 02.12.2016.
  */
-public class InputCubicFragment extends BaseInputFragment {
+public class InputQuadraticFragment extends BaseInputFragment {
 
     @Bind(R.id.etAMax) EditText etAMax;
     @Bind(R.id.etAb) EditText etAb;
@@ -38,7 +38,7 @@ public class InputCubicFragment extends BaseInputFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_input_cubic, container, false);
+        View root = inflater.inflate(R.layout.fragment_input_quadratic, container, false);
         ButterKnife.bind(this, root);
         return root;
     }
@@ -56,7 +56,7 @@ public class InputCubicFragment extends BaseInputFragment {
                     FuzzyNumber a = getCubicNumber(etAb, etAMax);
                     FuzzyNumber b = getCubicNumber(etBb, etBMax);
                     FuzzyFunction fun = getSelectedFunction();
-                    DependencyFunction depFun = new CubicDependencyFunction();
+                    DependencyFunction depFun = new QuadraticDependencyFunction();
                     Integer steps = getSteps();
                     boolean isFullResult = isFullResult();
                     FuzzyCondition condition = new FuzzyCondition(a, b, fun, depFun, steps, isFullResult);

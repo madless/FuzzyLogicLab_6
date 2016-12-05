@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initPager() {
-        Fragment cubicFragment = new InputCubicFragment();
+        Fragment cubicFragment = new InputQuadraticFragment();
         Fragment gaussFragment = new InputGaussFragment();
         Fragment triangleFragment = new InputTriangleFragment();
         ArrayList<Fragment> fragments = new ArrayList<>(Arrays.asList(triangleFragment, gaussFragment, cubicFragment));
-        ArrayList<String> titles = new ArrayList<>(Arrays.asList("Triangle", "Gauss", "Cubic"));
+        ArrayList<String> titles = new ArrayList<>(Arrays.asList("Triangle", "Gauss", "Quadratic"));
         adapter = new TitledFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
         tabs.setupWithViewPager(viewPager);
